@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recomendation Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="../static/img/favicon.png">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo-ul">
+         
+        <img src="../static/img/website-logo.png" alt="logo" onclick="document.getElementById('home').click();">
+      
+        <ul>
+            {% if session.logged_in %}
+            <li><a href="/" id="home">Home</a></li>
+            <li><a href="/recommendation" id="recommendation">Recommendation</a></li>
+            <li><a href="/about" id="about">About</a></li>
+            <li><a href="/contact" id="contact">Contact</a></li>
+            <li><a href="/logout" id="logout">Logout</a></li>
+            <div class="welcome">
+            <div class="welcome-user"><h4>Welcome {{ session.name }}</h4></div>   
+            </div> 
+            {% else %}
+            <li><a href="/" id="home">Home</a></li>
+            <li><a href="/recommendation" id="recommendation">Recommendation</a></li>
+            <li><a href="/about" id="about">About</a></li>
+            <li><a href="/contact" id="contact">Contact</a></li>
+            <li><a href="/login" id="login">Login</a></li>
+            {% endif %}
+        </ul>
+      </div>
+     
+    </nav>
+</header>
+        
+        <div class="container">
+          <div class="content">
+            <div class="left-side">
+              <div class="address details">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="topic">Address</div>
+                <div class="text-one"> Kolaghat Thermal Power Plant Township, Kolaghat, West Bengal 721171</div>
+              </div>
+              <div class="phone details">
+                <i class="fas fa-phone-alt"></i>
+                <div class="topic">Phone</div>
+                <div class="text-one">+91 6294657507</div>
+                <div class="text-two">+91 9083873730</div>
+                <div class="text-two">+91 7667211009</div>
+              </div>
+              <div class="email details">
+                <i class="fas fa-envelope"></i>
+                <div class="topic">Email</div>
+                <div class="text-one">cse19117@cemk.ac.in</div>
+                <div class="text-two">cse19055@cemk.ac.in</div>
+                <div class="text-two">cse19056@cemk.ac.in</div>
+              </div>
+            </div>
+            <div class="right-side">
+              <div class="topic-text">
+                <h2>Contact Us</h2>
+              </div>
+            <form action="#">
+              <div class="input-box">
+                <label for="name">Your name</label>
+                <input type="text" name="name" required>
+              </div>
+              <div class="input-box">
+                <label for="email">Your email</label>
+                <input type="text" name="email" required>
+              </div>
+              <div class="input-box message-box">
+                <label for="message">Type your message here </label>
+                <textarea name="message" required></textarea>
+              </div>
+              <div class="button">
+                <input type="button" value="Send Now" >
+              </div>
+            </form>
+          </div>
+          </div>
+        </div>
+</body>
+</html>

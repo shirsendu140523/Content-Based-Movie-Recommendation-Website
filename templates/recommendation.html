@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recomendation Website</title>
+    <link rel="icon" type="image/png" href="../static/img/favicon.png">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+   <header>
+      <nav>
+        <div class="logo-ul">
+           
+          <img src="../static/img/website-logo.png" alt="logo" onclick="document.getElementById('home').click();">
+        
+          <ul>
+              {% if session.logged_in %}
+              <li><a href="/" id="home">Home</a></li>
+              <li><a href="/recommendation" id="recommendation">Recommendation</a></li>
+              <li><a href="/about" id="about">About</a></li>
+              <li><a href="/contact" id="contact">Contact</a></li>
+              <li><a href="/logout" id="logout">Logout</a></li>
+              <div class="welcome">
+              <div class="welcome-user"><h4>Welcome {{ session.name }}</h4></div>   
+              </div> 
+              {% else %}
+              <li><a href="/" id="home">Home</a></li>
+              <li><a href="/recommendation" id="recommendation">Recommendation</a></li>
+              <li><a href="/about" id="about">About</a></li>
+              <li><a href="/contact" id="contact">Contact</a></li>
+              <li><a href="/login" id="login">Login</a></li>
+              {% endif %}
+          </ul>
+        </div>
+       
+      </nav>
+  </header>
+
+       {% if session.logged_in %}
+        <div class="search-movie">
+            <h1 style="text-align: center;color:white;margin-top: 30px;">Type a movie name</h1>
+       <br/>
+           <form action="/recommendation" method="post" id="movie-form">
+           <input type="text" class="form-select" id="movies" list="movie-list" name="movies">
+           <datalist id="movie-list">
+             {% for j in movie_list %}
+             <option value="{{j}}">{{j}}</option>
+             {% endfor %}
+           </datalist>
+           <br/>
+             <button type="submit" name="button" class="movie-button" id="form-submit">Submit</button>
+            </form>
+        </div>
+   
+        <br/>
+        {% else %}
+        <div class="message">
+        <p><span>Please login first to use this feature, <a href="/login">click here</a></span></p>
+        </div>
+       {% endif %}
+         
+        {% if status == True %}
+        <div class="movie-heading">
+         <h2>Movie name: {{movie_name}}</h2>
+         </div>
+         <br/>
+
+         <section id="movie-select-section">
+            <div class="movie-select" id="movie-select" style="margin-left: 98px;">
+               <div class="movie-poster">
+                  <img src="{{movie_select_poster[0]}}" alt="{{movie_name}}" onclick="movie_select()">
+               <div class="movie-description">
+                 <h3 id="movie-select">{{movie_name}}</h3>
+               </div>
+               <div class="movie-overview">
+                  <h3>Overview</h3>
+                  {{movie_select_overview[0]}}
+                  <div class="button-class-select">
+                  <button class="know-more-select" id="selectMovie" onclick="selectMovie()">Know More</button>
+                  </div>
+               </div>
+             </div>   
+            </div>
+            <div class="selectContent">
+               <button class="clear-details" onclick="buttonClear()">&times;</button>
+               <div class="rating">
+                  <h3>Rating:</h3>
+                  <span>{{movie_select_rating[0]}}</span>
+               </div>
+               <div class="genres">
+                  <h3>Genre:</h3>
+                  <span>{{movie_select_genres[0]}}</span>
+               </div>
+               <div class="cast">
+                  <h3>Cast:</h3>
+                  <span>{{movie_select_cast[0]}}</span>
+               </div>
+               <div class="crew">
+                  <h3>Crew:</h3>
+                  <span>{{movie_select_crew[0]}}</span>
+               </div>
+             </div> 
+         </section>
+         <br/>
+  
+         <div class="movie-heading">
+            <h2>Recommended movies:</h2>
+         </div>
+   
+            <br/>
+
+         <main id="movie-main">
+          <div class="movie-poster">
+             <img src="{{poster[0]}}" alt="{{recommended_movies_name[0]}}" onclick="movie_first()">
+          <div class="movie-description">
+            <h3 id="movie-first" >{{recommended_movies_name[0]}}</h3>
+          </div>
+          <div class="movie-overview">
+            <h3>Overview</h3>
+             {{recommended_movies_overview[0]}}
+          </div>
+        </div>
+
+          <div class="movie-poster">
+            <img src="{{poster[1]}}" alt="{{recommended_movies_name[1]}}" onclick="movie_second()">
+         <div class="movie-description">
+           <h3 id="movie-second">{{recommended_movies_name[1]}}</h3>
+         </div>
+         <div class="movie-overview">
+            <h3>Overview</h3>
+            {{recommended_movies_overview[1]}}
+         </div>
+        </div>
+
+         <div class="movie-poster">
+          <img src="{{poster[2]}}" alt="{{recommended_movies_name[2]}}" onclick="movie_third()">
+       <div class="movie-description">
+         <h3 id="movie-third">{{recommended_movies_name[2]}}</h3>
+       </div>
+       <div class="movie-overview">
+         <h3>Overview</h3>
+          {{recommended_movies_overview[2]}}
+       </div>
+      </div>
+
+       <div class="movie-poster">
+        <img src="{{poster[3]}}" alt="{{recommended_movies_name[3]}}" onclick="movie_fourth()">
+     <div class="movie-description">
+       <h3 id="movie-fourth">{{recommended_movies_name[3]}}</h3>
+     </div>
+     <div class="movie-overview">
+      <h3>Overview</h3>
+        {{recommended_movies_overview[3]}}
+     </div>
+    </div>
+
+     <div class="movie-poster">
+      <img src="{{poster[4]}}" alt="{{recommended_movies_name[4]}}" onclick="movie_fifth()">
+   <div class="movie-description">
+     <h3 id="movie-fifth">{{recommended_movies_name[4]}}</h3>
+   </div>
+   <div class="movie-overview">
+      <h3>Overview</h3>
+      {{recommended_movies_overview[4]}}
+   </div>
+  </div>
+
+     <div class="movie-poster">
+      <img src="{{poster[5]}}" alt="{{recommended_movies_name[5]}}" onclick="movie_sixth()">
+   <div class="movie-description">
+     <h3 id="movie-sixth">{{recommended_movies_name[5]}}</h3>
+   </div>
+   <div class="movie-overview">
+      <h3>Overview</h3>
+      {{recommended_movies_overview[5]}}
+   </div>
+  </div>
+
+     <div class="movie-poster">
+      <img src="{{poster[6]}}" alt="{{recommended_movies_name[6]}}" onclick="movie_seventh()">
+   <div class="movie-description">
+     <h3 id="movie-seventh">{{recommended_movies_name[6]}}</h3>
+   </div>
+   <div class="movie-overview">
+      <h3>Overview</h3>
+      {{recommended_movies_overview[6]}}
+   </div>
+  </div>
+
+     <div class="movie-poster">
+      <img src="{{poster[7]}}" alt="{{recommended_movies_name[7]}}" onclick="movie_eighth()">
+   <div class="movie-description">
+     <h3 id="movie-eighth">{{recommended_movies_name[7]}}</h3>
+   </div>
+   <div class="movie-overview">
+      <h3>Overview</h3>
+      {{recommended_movies_overview[7]}}
+   </div>
+  </div>
+
+</main>
+
+        {% endif %}
+        
+        <script>
+         function movie_select(){
+            var movie_name = document.getElementById("movie-select").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_first(){
+            var movie_name = document.getElementById("movie-first").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_second(){
+            var movie_name = document.getElementById("movie-second").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_third(){
+            var movie_name = document.getElementById("movie-third").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_fourth(){
+            var movie_name = document.getElementById("movie-fourth").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_fifth(){
+            var movie_name = document.getElementById("movie-fifth").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_sixth(){
+            var movie_name = document.getElementById("movie-sixth").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_seventh(){
+            var movie_name = document.getElementById("movie-seventh").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+
+         function movie_eighth(){
+            var movie_name = document.getElementById("movie-eighth").textContent
+            // alert(movie_name)
+            document.getElementById("movies").value = movie_name
+            document.getElementById("movie-form").submit()
+         }
+         // get the selected movies rating, genres, cast, crew
+         function selectMovie() {
+            var selectContent = document.querySelector(".selectContent");
+            selectContent.style.display = "flex";
+            selectContent.style.flexDirection = "column";
+            selectContent.style.border = "1px solid white";
+            selectContent.style.width = "50%";
+            selectContent.style.marginTop = "30px";
+         }
+         //  clear the selected movies rating, genres, cast, crew
+         function buttonClear() {
+            document.querySelector(".selectContent").style.display = "none";
+         }
+        </script>
+</body>
+</html>

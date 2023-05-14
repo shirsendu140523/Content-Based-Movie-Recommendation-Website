@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recomendation Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="../static/img/favicon.png">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="logo-ul">
+             
+            <img src="../static/img/website-logo.png" alt="logo" onclick="document.getElementById('home').click();">
+          
+            <ul>
+                {% if session.logged_in %}
+                <li><a href="/" id="home">Home</a></li>
+                <li><a href="/recommendation" id="recommendation">Recommendation</a></li>
+                <li><a href="/about" id="about">About</a></li>
+                <li><a href="/contact" id="contact">Contact</a></li>
+                <li><a href="/logout" id="logout">Logout</a></li>
+                <div class="welcome">
+                <div class="welcome-user"><h4>Welcome {{ session.name }}</h4></div>   
+                </div> 
+                {% else %}
+                <li><a href="/" id="home">Home</a></li>
+                <li><a href="/recommendation" id="recommendation">Recommendation</a></li>
+                <li><a href="/about" id="about">About</a></li>
+                <li><a href="/contact" id="contact">Contact</a></li>
+                <li><a href="/login" id="login">Login</a></li>
+                {% endif %}
+            </ul>
+          </div>
+         
+        </nav>
+    </header>
+    
+    <div class="about-us">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>Welcome to 'MovieRec', your go-to destination for movie recommendations and descriptions! Our team of movie enthusiasts is dedicated to providing you with the best information and recommendations to help you choose your next movie to watch. Our mission is to make it easy for you to find movies that you'll love. We understand that there are a lot of movies out there to choose from, and it can be overwhelming to decide which one to watch next. At 'MovieRec', we believe that movies have the power to inspire, entertain, and inform. That's why we're passionate about helping you discover new movies that you'll love, and sharing our own recommendations with you. Whether you're in the mood for a classic film, a thrilling action flick, or a heartwarming romance, we've got you covered. Our team is comprised of movie buffs and experts who are dedicated to staying up-to-date with the latest releases and trends in the movie industry. We're constantly adding new movies and reviews to our site, so you can always find something fresh and exciting to watch. Thank you for choosing 'MovieRec' as your go-to source for movie recommendations and descriptions. We hope you enjoy using our platform as much as we enjoy creating it! Of course, you can customize this page to fit the specific needs and values of your website. The most important thing is to convey your passion for movies and your dedication to helping users find movies they'll love.</p>
+        </div>
+        <div class="about-image">
+            <img src="../static/img/about-logo.jpg" alt="About Us image">
+        </div>
+    </div>
+    <div class="our-team">
+        <div class="team-heading">
+            <h2>Our Team</h2>
+        </div> 
+        <div class="team-member">
+            <div class="team-poster">
+                <img src="../static/img/shirsendu-photo.jpg" alt="Shirsendu Manna" >
+             <div class="team-overview">
+               <h3>Shirsendu Manna</h3>
+               <span>B.Tech in CSE</span>
+               <span>UI/UX designer, Python, Machine learning enthusiast</span>
+               <span>Phone: +91 6294657507</span>
+               <span>Email: cse19117@cemk.ac.in</span>
+               <div class="socials">
+                <span>Socials: </span>
+                <a href="https://www.facebook.com/shirsendu.manna.731?mibextid=ZbWKwL"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/shirsendu-manna-680aa0230/"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/shirsendu849/Content-Based-Movie-Recommendation-Website"><i class="fab fa-github"></i></a>
+               </div>
+             </div>
+           </div>
+
+           <div class="team-poster">
+            <img src="../static/img/souvik-photo.jpg" alt="Souvik Manna">
+         <div class="team-overview">
+            <h3>Souvik Manna</h3>
+            <span>B.Tech in CSE</span>
+            <span>UI/UX designer, C++, Machine learning enthusiast</span>
+            <span>Phone: +91 9083873730</span>
+            <span>Email: cse19055@cemk.ac.in</span>
+            <div class="socials">
+                <span>Socials: </span>
+                <a href="https://www.facebook.com/souvik.manna.9849?mibextid=ZbWKwL"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/souvik-manna-0aaa0716b/"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Souvik19055"><i class="fab fa-github"></i></a>
+               </div>      
+         </div>
+       </div>
+
+       <div class="team-poster">
+        <img src="../static/img/sanny-photo.jpg" alt="Sanny Gupta">
+       <div class="team-overview">
+        <h3>Sanny Gupta</h3>
+        <span>B.Tech in CSE</span>
+        <span>UI/UX designer, Python, Machine learning enthusiast</span>
+        <span>Phone: +91 7667211009</span>
+        <span>Email: cse19056@cemk.ac.in</span>  
+        <div class="socials">
+            <span>Socials: </span>
+            <a href="https://www.facebook.com/sanny.gupta.102977/"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.linkedin.com/in/sanny-gupta-32a0011b4/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/SANNY-GUPTA"><i class="fab fa-github"></i></a>
+           </div>
+     </div>
+   </div>
+        </div>
+    </div>
+</body>
+</html>
